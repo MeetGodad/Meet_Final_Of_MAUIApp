@@ -1,0 +1,65 @@
+﻿@page "/events"
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@inject EventRepository EventRepository
+
+<h3>Event Details</h3>
+
+@if (Event != null)
+{
+    <p>Ticket Cost: @Event.TicketCost</p>
+    <p>Genre: @Event.Genre</p>
+    <p>Artist: @Event.Artist</p>
+    <p>Event Date: @Event.EventDate</p>
+    <p>Event Time: @Event.EventTime</p>
+    <p>Venue: @Event.Venue</p>
+    <p>City: @Event.City</p>
+    <p>Description: @Event.Description</p>
+}
+else
+{
+    <p>Event not found.</p>
+}
+
+<h3>Search Events by Artist</h3>
+
+<div class="form-group">
+    <label for="artistName">Artist Name:</label>
+    <input type="text" class="form-control" id="artistName" @bind="@ArtistName" />
+</div>
+
+<button class="btn btn-primary" @onclick="SearchEvents">Search</button>
+
+@if (SearchResults != null && SearchResults.Any())
+{
+    <h4>Search Results:</h4>
+    <ul>
+        @foreach (var result in SearchResults)
+        {
+            <li>@result.Artist - @result.Genre</li>
+        }
+    </ul>
+}
+else if (SearchResults != null && !SearchResults.Any())
+{
+    <p>No events found for the given artist.</p>
+}
+
+@code {
+    private Event Event;
+    private string ArtistName;
+    private List<Event> SearchResults;
+
+    private EventRepository eventRepository;
+
+    protected override void OnInitialized()
+    {
+        eventRepository = new EventRepository(Configuration);
+    }
+
+    private void SearchEvents()
+    {
+        SearchResults = eventRepository.SearchEventsByArtist(ArtistName);
+    }
+}
