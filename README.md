@@ -33,7 +33,7 @@
 ### Core Features
 
 - **Event Management**: Add, update, delete, and view concert events.
-- **Database Integration**: Store and retrieve event data using SQLite.
+- **Database Integration**: Store and retrieve event data using MySQL.
 - **User Interface**: Intuitive MAUI-based GUI for easy interaction.
 - **Error Handling**: Comprehensive exception handling to ensure application stability.
 - **Input Validation**: Ensures all user inputs are valid and secure.
@@ -43,7 +43,7 @@
 ### Key Classes
 
 - **Event**: Represents a concert event with properties like `EventId`, `Name`, `Date`, `Location`, and `Description`.
-- **DatabaseManager**: Handles database operations like connecting, querying, and updating the SQLite database.
+- **DatabaseManager**: Handles database operations like connecting, querying, and updating the MySQL database.
 - **EventViewModel**: Manages the data binding between the GUI and the event data.
 
 ### Inheritance and Interfaces
@@ -91,6 +91,3 @@ This project successfully integrates various aspects of software development, fr
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
